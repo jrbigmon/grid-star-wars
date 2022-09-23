@@ -21,22 +21,21 @@ interface DataPeople {
 }
 
 function TablePeoples() {
+  const [peoples, setPeoples] = useState<DataPeople[]>([])
+  const [page, setPage] = useState<string>('people')
+  const [next, setNext] = useState<string>('')
+  const [previous, setPrevious] = useState<string>('')
 
   async function getPeoples() {
-    const response = await starWarsApi.get(`people/${page}`)
-    return setPeoples(response.data.results)
+    const response = await starWarsApi.get(`${page}`)
+    setNext(response.data.next)
+    setPrevious(response.data.previous)
+    setPeoples(response.data.results)
   }
-
-  function setNumberPage(){
-
-  }
-
-  const [peoples, setPeoples] = useState<DataPeople[]>([])
-  const [page, setPage] = useState<string>('')
 
   useEffect(() => {
     getPeoples()
-  }, [])
+  }, [page])
 
 
   return (
@@ -68,10 +67,22 @@ function TablePeoples() {
           })}
         </tbody>
       </table>
+
       <div className="flex justify-center">
-        <Button text={'Previus'} />
-        <Button text={'Next'} />
+        <Button 
+          text={'Previus'}
+          execute={() => {
+            previous !== null ? setPage(previous) : ''
+          }}
+        />
+        <Button 
+          text={'Next'} 
+          execute={() => {
+            next !== null ? setPage(next) : ''
+          }} 
+        />
       </div>
+
     </div>
   );
 }
