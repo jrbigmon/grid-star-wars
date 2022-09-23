@@ -5,7 +5,11 @@ module.exports = {
     './index.html'
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        galaxy: "url('/cover.svg')"
+      }
+    },
   },
   plugins: [],
 }
