@@ -4,7 +4,7 @@ interface Values {
 
 function TitleLine(props : Values) {
     return (
-        <th className="border p-2">{props.text}</th>
+        <th className="border p-2 text-lg text-sky-800">{props.text}</th>
     )
 }
 

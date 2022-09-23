@@ -4,7 +4,7 @@ interface Values {
 
 function Td(props: Values){
     return (
-        <td className="border">{props.text}</td>
+        <td className="border text-lg text-center text-[#FFDF00]">{props.text}</td>
     )
 }
 

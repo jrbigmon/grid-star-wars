@@ -32,7 +32,7 @@ function TableDataPeople(props: DataPeople) {
     return (
         <tr className="border">
           <TableData text={props.name}/>
-          <TableData text={props.height}/>
+          <TableData text={`${props.height} cm`}/>
           <TableData text={props.mass}/>
           <TableData text={props.hairColor}/>
           <TableData text={props.skinColor}/>
