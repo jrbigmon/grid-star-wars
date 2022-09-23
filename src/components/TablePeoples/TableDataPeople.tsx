@@ -1,20 +1,48 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import TableData from '../TableData'
 
-function TableDataPeople() {
+interface DataPeople {
+    name: string
+      height: string
+      mass: string 
+      hairColor: string
+      skinColor: string
+      eyeColor: string
+      birthYear: string
+      gender: string
+      homeworld: string
+      films: []
+      species: []
+      vehicles: []
+      starships: []
+}
+
+function TableDataPeople(props: DataPeople) {
+    const [homewolrdName, setHomeworld] = useState('')
+    
+    async function gethomewoldName(){
+        const response = await axios.get(props.homeworld)
+        setHomeworld(response.data.name)
+    }
+
+    useEffect(() => {
+        gethomewoldName()
+    }, [])
     return (
         <tr className="border">
-          <TableData text={'Luke sky walker'}/>
-          <TableData text={`${167}cm`}/>
-          <TableData text={"75"}/>
-          <TableData text={'blond'}/>
-          <TableData text={'fair'}/>
-          <TableData text={'blue'}/>
-          <TableData text={'1967'}/>
-          <TableData text={'male'}/>
-          <TableData text={'Tatoine'}/>
-          <TableData text={'new hope, ...'}/>
-          <TableData text={'bicicreta, motocicreta'}/>
-          <TableData text={'Avião teco teco, Helicóptero'}/>
+          <TableData text={props.name}/>
+          <TableData text={props.height}/>
+          <TableData text={props.mass}/>
+          <TableData text={props.hairColor}/>
+          <TableData text={props.skinColor}/>
+          <TableData text={props.eyeColor}/>
+          <TableData text={props.birthYear}/>
+          <TableData text={props.gender}/>
+          <TableData text={homewolrdName}/>
+          <TableData text={props.films.length}/>
+          <TableData text={props.vehicles.length}/>
+          <TableData text={props.starships.length}/>
         </tr>
     )
 }
