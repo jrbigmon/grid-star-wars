@@ -1,6 +1,8 @@
+import './styles/main.css'
+import TablePeoples from "./components/TablePeoples"
 function App() {
   return (
-    
+    <TablePeoples />
   )
 }
 
