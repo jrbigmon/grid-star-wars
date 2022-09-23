@@ -1,5 +1,5 @@
 interface Values {
-    text: string
+    text: any
 }
 
 function Td(props: Values){
