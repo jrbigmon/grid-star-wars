@@ -1,14 +1,14 @@
-import TableData from "./TableData";
-import TableHeader from "./TableHeader";
+import TableDataPeople from "./TableDataPeople";
+import TableHeaderPeople from "./TableHeaderPeople";
 
 function TablePeoples() {
   return (
     <table className="table-fixed">
       <thead>
-        <TableHeader />
+        <TableHeaderPeople />
       </thead>
       <tbody>
-        <TableData />
+        <TableDataPeople />
       </tbody>
     </table>
   );
