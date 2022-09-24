@@ -33,45 +33,59 @@ function TablePeoples() {
 
   async function getPeoplesWithOrWithOutFilters() {
     const response = await starWarsApi.get(`${page}`)
-    const peoples = response.data.results
-    if(eyeColor === '' && skinColor === '') {
-      return setPeoples(peoples)
+    const peoples = response.data.results 
+    if(eyeColor === '' && skinColor === ''){
+      return setPeoples(peoples)  
+
     } else if(eyeColor !== '' && skinColor == ''){
-      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+      const peoplesWithEyeFilter = peoples.filter((people: DataPeople) => {
         if(people.eye_color === eyeColor) return people
       })
-      setPeoples(peoplesWithFilter)
+      return setPeoples(peoplesWithEyeFilter)
+    
     } else if(eyeColor === '' && skinColor !== ''){
-      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+      const peoplesWithSkinFilter = peoples.filter((people: DataPeople) => {
         if(people.skin_color === skinColor) return people
       })
-      setPeoples(peoplesWithFilter)
-    } else {
-      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+      return setPeoples(peoplesWithSkinFilter)
+    
+    } else if(eyeColor !== '' && skinColor !== '') {
+      const peoplesWithDubleFilter = peoples.filter((people: DataPeople) => {
         if(people.skin_color === skinColor && people.eye_color == eyeColor) return people
       })
-      setPeoples(peoplesWithFilter)
+      return setPeoples(peoplesWithDubleFilter)
     }
-    
   }
+
   async function getNextAndPrevius() {
     const response = await starWarsApi.get(`${page}`)
-    setNext(response.data.next)
-    setPrevious(response.data.previous)
+    return (
+      setNext(response.data.next),
+      setPrevious(response.data.previous)
+    )
   }
+
   async function getEyeColors() {
     const response = await starWarsApi.get(`${page}`)
-    const eyeColors = response.data.results.map((people: DataPeople) => {
+    const peoples = response.data.results
+    const eyeColors = peoples.map((people: DataPeople) => {
       return people.eye_color
     })
-    setEyeColors(eyeColors)
+    const eyeColorsNotRepeat = eyeColors.filter((el: string, i: number) => {
+      return eyeColors.indexOf(el) === i;
+    });
+    return setEyeColors(eyeColorsNotRepeat)
   }
+
   async function getSkinColors() {
     const response = await starWarsApi.get(`${page}`)
     const skinColors = response.data.results.map((people: DataPeople) => {
       return people.skin_color
     })
-    setSkinColors(skinColors)
+    const skynColorsNotRepeat = skinColors.filter((el: string, i: number) => {
+      return skinColors.indexOf(el) === i;
+    });
+    return setSkinColors(skynColorsNotRepeat)
   }
 
   useEffect(() => {
