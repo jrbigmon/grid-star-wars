@@ -16,5 +16,7 @@ npm run dev
 ```bash
 npm run preview
 ```
-## Access route to you view project
+## Access route to you view project, case run preview
 http://127.0.0.1:4173/
+## Access route to you view project, case run dev
+http://127.0.0.1:5173/
