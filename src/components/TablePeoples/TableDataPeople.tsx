@@ -4,18 +4,18 @@ import TableData from '../TableData'
 
 interface DataPeople {
     name: string
-      height: string
-      mass: string 
-      hairColor: string
-      skinColor: string
-      eyeColor: string
-      birthYear: string
-      gender: string
-      homeworld: string
-      films: []
-      species: []
-      vehicles: []
-      starships: []
+    height: string
+    mass: string 
+    hairColor: string
+    skinColor: string
+    eyeColor: string
+    birthYear: string
+    gender: string
+    homeworld: string
+    films: []
+    species: []
+    vehicles: []
+    starships: []
 }
 
 function TableDataPeople(props: DataPeople) {
@@ -28,7 +28,7 @@ function TableDataPeople(props: DataPeople) {
 
     useEffect(() => {
         gethomewoldName()
-    }, [])
+    }, [props])
     return (
         <tr className="border">
           <TableData text={props.name}/>
