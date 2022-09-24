@@ -2,7 +2,9 @@ import './styles/main.css'
 import TablePeoples from "./components/TablePeoples"
 function App() {
   return (
-    <TablePeoples />
+    <div className='p-4'>
+      <TablePeoples />
+    </div>
   )
 }
 
