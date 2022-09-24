@@ -28,15 +28,27 @@ function TablePeoples() {
   const [previous, setPrevious] = useState<string>('')
   const [eyeColors, setEyeColors] = useState<[]>([])
   const [eyeColor, setEyeColor] = useState<string>('')
+  const [skinColors, setSkinColors] = useState<[]>([])
+  const [skinColor, setSkinColor] = useState<string>('')
 
-  async function getPeoples() {
+  async function getPeoplesWithOrWithOutFilters() {
     const response = await starWarsApi.get(`${page}`)
     const peoples = response.data.results
-    if(eyeColor === '') {
+    if(eyeColor === '' && skinColor === '') {
       return setPeoples(peoples)
-    } else {
+    } else if(eyeColor !== '' && skinColor == ''){
       const peoplesWithFilter = peoples.filter((people: DataPeople) => {
         if(people.eye_color === eyeColor) return people
+      })
+      setPeoples(peoplesWithFilter)
+    } else if(eyeColor === '' && skinColor !== ''){
+      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+        if(people.skin_color === skinColor) return people
+      })
+      setPeoples(peoplesWithFilter)
+    } else {
+      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+        if(people.skin_color === skinColor && people.eye_color == eyeColor) return people
       })
       setPeoples(peoplesWithFilter)
     }
@@ -54,19 +66,29 @@ function TablePeoples() {
     })
     setEyeColors(eyeColors)
   }
+  async function getSkinColors() {
+    const response = await starWarsApi.get(`${page}`)
+    const skinColors = response.data.results.map((people: DataPeople) => {
+      return people.skin_color
+    })
+    setSkinColors(skinColors)
+  }
 
   useEffect(() => {
-    getPeoples()
+    getPeoplesWithOrWithOutFilters()
     getNextAndPrevius()
     getEyeColors()
-  }, [page, eyeColor])
+    getSkinColors()
+  }, [page, eyeColor, skinColor])
 
 
   return (
     <div className="flex justify-center flex-col">
-      <SearchBar 
+      <SearchBar
+        skinColors={skinColors}
+        methodSkin={setSkinColor} 
         eyeColors={eyeColors}
-        method={setEyeColor}
+        methodEye={setEyeColor}
       />
       <table className="table-fixed">
         <thead>

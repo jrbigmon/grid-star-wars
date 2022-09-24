@@ -1,23 +1,17 @@
+import EyeColorsFilter from './EyeColorsFilter'
+import SkinColorsFilter from './SkinColorsFilter'
 interface DataPeople {
-    skinColors?: []
+    skinColors: []
     eyeColors: []
-    method: any
+    methodEye: any
+    methodSkin: any
 }
 
 function SearchBar(props: DataPeople){
     return (
-        <div>
-            <select
-                onChange={e => props.method(e.target.value)}
-            >
-                {props.eyeColors.map((color, i) => {
-                    return (
-                        <option key={i} value={color}>
-                            {color}
-                        </option>
-                    )
-                })} 
-            </select>
+        <div className='flex'>
+            <EyeColorsFilter eyeColors={props.eyeColors} methodEye={props.methodEye} />
+            <SkinColorsFilter skinColors={props.skinColors} methodSkin={props.methodSkin}/>
         </div>
     )
 }
