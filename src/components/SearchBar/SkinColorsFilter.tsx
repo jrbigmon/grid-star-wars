@@ -3,13 +3,13 @@ interface DataPeople {
     methodSkin: any
 }
 
-function ColorEyesFilter(props: DataPeople){
+function SkinColorsFilter(props: DataPeople){
     return (
         <div className="mb-5 flex flex-col justify-center w-max mx-4">
-            <label htmlFor="eyeColors" className="block text-[#FFDF00] font-black">Cor da pele</label>
+            <label htmlFor="skinColor" className="block text-[#FFDF00] font-black">Cor da pele</label>
             <select
                 className="bg-slate-500 text-white w-full rounded-sm overflow-hidden"
-                id="eyeColors"
+                id="skinColor"
                 onChange={e => props.methodSkin(e.target.value)}
             >
                 <option value="">Todos</option>
@@ -25,4 +25,4 @@ function ColorEyesFilter(props: DataPeople){
     )
 }
 
-export default ColorEyesFilter
+export default SkinColorsFilter
