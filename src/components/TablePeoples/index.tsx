@@ -27,10 +27,20 @@ function TablePeoples() {
   const [next, setNext] = useState<string>('')
   const [previous, setPrevious] = useState<string>('')
   const [eyeColors, setEyeColors] = useState<[]>([])
+  const [eyeColor, setEyeColor] = useState<string>('')
 
   async function getPeoples() {
     const response = await starWarsApi.get(`${page}`)
-    setPeoples(response.data.results)
+    const peoples = response.data.results
+    if(eyeColor === '') {
+      return setPeoples(peoples)
+    } else {
+      const peoplesWithFilter = peoples.filter((people: DataPeople) => {
+        if(people.eye_color === eyeColor) return people
+      })
+      setPeoples(peoplesWithFilter)
+    }
+    
   }
   async function getNextAndPrevius() {
     const response = await starWarsApi.get(`${page}`)
@@ -45,17 +55,19 @@ function TablePeoples() {
     setEyeColors(eyeColors)
   }
 
-
   useEffect(() => {
     getPeoples()
     getNextAndPrevius()
     getEyeColors()
-  }, [page])
+  }, [page, eyeColor])
 
 
   return (
     <div className="flex justify-center flex-col">
-      <SearchBar eyeColors={eyeColors}/>
+      <SearchBar 
+        eyeColors={eyeColors}
+        method={setEyeColor}
+      />
       <table className="table-fixed">
         <thead>
           <TableHeaderPeople />
