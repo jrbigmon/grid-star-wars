@@ -3,7 +3,7 @@ interface DataPeople {
     methodEye: any
 }
 
-function ColorEyesFilter(props: DataPeople){
+function EyeColorsFilter(props: DataPeople){
     return (
         <div className="mb-5 flex flex-col justify-center w-max mx-4">
             <label htmlFor="eyeColors" className="block text-[#FFDF00] font-black">Cor dos olhos</label>
@@ -25,4 +25,4 @@ function ColorEyesFilter(props: DataPeople){
     )
 }
 
-export default ColorEyesFilter
+export default EyeColorsFilter
