@@ -28,7 +28,7 @@ function TableDataPeople(props: DataPeople) {
 
     useEffect(() => {
         gethomewoldName()
-    }, [props])
+    }, [props.homeworld])
     return (
         <tr className="border">
           <TableData text={props.name}/>
