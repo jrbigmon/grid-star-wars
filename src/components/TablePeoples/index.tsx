@@ -31,30 +31,9 @@ function TablePeoples() {
   const [skinColors, setSkinColors] = useState<[]>([])
   const [skinColor, setSkinColor] = useState<string>('')
 
-  async function getPeoplesWithOrWithOutFilters() {
+  async function getPeoples() {
     const response = await starWarsApi.get(`${page}`)
-    const peoples = response.data.results 
-    if(eyeColor === '' && skinColor === ''){
-      return setPeoples(peoples)  
-
-    } else if(eyeColor !== '' && skinColor == ''){
-      const peoplesWithEyeFilter = peoples.filter((people: DataPeople) => {
-        if(people.eye_color === eyeColor) return people
-      })
-      return setPeoples(peoplesWithEyeFilter)
-    
-    } else if(eyeColor === '' && skinColor !== ''){
-      const peoplesWithSkinFilter = peoples.filter((people: DataPeople) => {
-        if(people.skin_color === skinColor) return people
-      })
-      return setPeoples(peoplesWithSkinFilter)
-    
-    } else if(eyeColor !== '' && skinColor !== '') {
-      const peoplesWithDubleFilter = peoples.filter((people: DataPeople) => {
-        if(people.skin_color === skinColor && people.eye_color == eyeColor) return people
-      })
-      return setPeoples(peoplesWithDubleFilter)
-    }
+    setPeoples( response.data.results )
   }
 
   async function getNextAndPrevius() {
@@ -89,7 +68,7 @@ function TablePeoples() {
   }
 
   useEffect(() => {
-    getPeoplesWithOrWithOutFilters()
+    getPeoples()
     getNextAndPrevius()
     getEyeColors()
     getSkinColors()
@@ -110,24 +89,92 @@ function TablePeoples() {
         </thead>
         <tbody>
           {peoples.map((people, i) => {
-            return (
-              <TableDataPeople
-                key={i}
-                name={people.name}
-                height={people.height}
-                mass={people.mass}
-                hairColor={people.hair_color}
-                skinColor={people.skin_color}
-                eyeColor={people.eye_color}
-                birthYear={people.birth_year}
-                gender={people.gender}
-                homeworld={people.homeworld}
-                films={people.films}
-                species={people.species}
-                vehicles={people.vehicles}
-                starships={people.starships}
-              />
-            )
+            if(skinColor === '' && eyeColor === ''){
+              return (
+                <TableDataPeople
+                    key={i}
+                    name={people.name}
+                    height={people.height}
+                    mass={people.mass}
+                    hairColor={people.hair_color}
+                    skinColor={people.skin_color}
+                    eyeColor={people.eye_color}
+                    birthYear={people.birth_year}
+                    gender={people.gender}
+                    homeworld={people.homeworld}
+                    films={people.films}
+                    species={people.species}
+                    vehicles={people.vehicles}
+                    starships={people.starships}
+                  />
+              )
+            }
+            if(skinColor !== '' && eyeColor === ''){
+              if(people.skin_color === skinColor){
+                return (
+                  <TableDataPeople
+                    key={i}
+                    name={people.name}
+                    height={people.height}
+                    mass={people.mass}
+                    hairColor={people.hair_color}
+                    skinColor={people.skin_color}
+                    eyeColor={people.eye_color}
+                    birthYear={people.birth_year}
+                    gender={people.gender}
+                    homeworld={people.homeworld}
+                    films={people.films}
+                    species={people.species}
+                    vehicles={people.vehicles}
+                    starships={people.starships}
+                  />
+                  )
+              }
+            }
+            if(eyeColor !== '' && skinColor === ''){
+              if(people.eye_color === eyeColor) {
+                return (
+                  <TableDataPeople
+                    key={i}
+                    name={people.name}
+                    height={people.height}
+                    mass={people.mass}
+                    hairColor={people.hair_color}
+                    skinColor={people.skin_color}
+                    eyeColor={people.eye_color}
+                    birthYear={people.birth_year}
+                    gender={people.gender}
+                    homeworld={people.homeworld}
+                    films={people.films}
+                    species={people.species}
+                    vehicles={people.vehicles}
+                    starships={people.starships}
+                  />
+                )
+              }
+            }
+            if(eyeColor !== '' && skinColor !== '') {
+              if(people.eye_color === eyeColor && people.skin_color === skinColor){
+                return (
+                  <TableDataPeople
+                    key={i}
+                    name={people.name}
+                    height={people.height}
+                    mass={people.mass}
+                    hairColor={people.hair_color}
+                    skinColor={people.skin_color}
+                    eyeColor={people.eye_color}
+                    birthYear={people.birth_year}
+                    gender={people.gender}
+                    homeworld={people.homeworld}
+                    films={people.films}
+                    species={people.species}
+                    vehicles={people.vehicles}
+                    starships={people.starships}
+                  />
+                )
+              }
+            }
           })}
         </tbody>
       </table>
