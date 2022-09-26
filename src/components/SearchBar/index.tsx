@@ -1,6 +1,6 @@
 import EyeColorsFilter from './EyeColorsFilter'
 import SkinColorsFilter from './SkinColorsFilter'
-import QuantityFilmsFilter from './quantityFilmsFilter'
+import QuantityFilmsFilter from './QuantityFilmsFilter'
 
 interface DataPeople {
     skinColors: []
