@@ -30,6 +30,7 @@ function TablePeoples() {
   const [eyeColor, setEyeColor] = useState<string>('')
   const [skinColors, setSkinColors] = useState<[]>([])
   const [skinColor, setSkinColor] = useState<string>('')
+  const [quantityfilms, setQuantityFilms] = useState(0)
 
   async function getPeoples() {
     const response = await starWarsApi.get(`${page}`)
@@ -82,6 +83,7 @@ function TablePeoples() {
         methodSkin={setSkinColor} 
         eyeColors={eyeColors}
         methodEye={setEyeColor}
+        methodFilms={setQuantityFilms}
       />
       <table className="table-fixed">
         <thead>
@@ -89,7 +91,7 @@ function TablePeoples() {
         </thead>
         <tbody>
           {peoples.map((people, i) => {
-            if(skinColor === '' && eyeColor === ''){
+            if(skinColor === '' && eyeColor === '' && people.films.length > quantityfilms){
               return (
                 <TableDataPeople
                     key={i}
@@ -110,7 +112,7 @@ function TablePeoples() {
               )
             }
             if(skinColor !== '' && eyeColor === ''){
-              if(people.skin_color === skinColor){
+              if(people.skin_color === skinColor && people.films.length > quantityfilms){
                 return (
                   <TableDataPeople
                     key={i}
@@ -132,7 +134,7 @@ function TablePeoples() {
               }
             }
             if(eyeColor !== '' && skinColor === ''){
-              if(people.eye_color === eyeColor) {
+              if(people.eye_color === eyeColor && people.films.length > quantityfilms) {
                 return (
                   <TableDataPeople
                     key={i}
@@ -154,7 +156,7 @@ function TablePeoples() {
               }
             }
             if(eyeColor !== '' && skinColor !== '') {
-              if(people.eye_color === eyeColor && people.skin_color === skinColor){
+              if(people.eye_color === eyeColor && people.skin_color === skinColor && people.films.length > quantityfilms){
                 return (
                   <TableDataPeople
                     key={i}
