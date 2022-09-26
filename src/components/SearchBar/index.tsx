@@ -10,8 +10,8 @@ interface DataPeople {
 function SearchBar(props: DataPeople){
     return (
         <div className='flex'>
-            <EyeColorsFilter eyeColors={props.eyeColors} methodEye={props.methodEye} />
             <SkinColorsFilter skinColors={props.skinColors} methodSkin={props.methodSkin}/>
+            <EyeColorsFilter eyeColors={props.eyeColors} methodEye={props.methodEye} />
         </div>
     )
 }
