@@ -10,6 +10,7 @@ function QuantityFilmsFilter(props: DataPeople){
                 className="bg-slate-500 text-white w-[100px] rounded-sm"
                 id="quantityFilms"
                 type='number'
+                min="0"
                 onChange={e => props.methodFilms(e.target.value)}
             />
         </div>
